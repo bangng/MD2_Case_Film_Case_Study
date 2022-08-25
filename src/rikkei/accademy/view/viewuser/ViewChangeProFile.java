@@ -1,15 +1,12 @@
-package rikkei.accademy.view;
+package rikkei.accademy.view.viewuser;
 
 import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.UserController;
-import rikkei.accademy.dto.request.SinUpDTO;
 import rikkei.accademy.model.User;
 import rikkei.accademy.service.user.IUserService;
 import rikkei.accademy.service.user.UserServiceIMPL;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 public class ViewChangeProFile {

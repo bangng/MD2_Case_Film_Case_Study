@@ -1,13 +1,13 @@
-package rikkei.accademy.view;
+package rikkei.accademy.view.viewuser;
 
 import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.UserController;
 import rikkei.accademy.dto.request.SinUpDTO;
 import rikkei.accademy.dto.response.ResponseMessenger;
-import rikkei.accademy.model.RoleName;
 import rikkei.accademy.model.User;
+import rikkei.accademy.view.viewuser.ViewHome;
+import rikkei.accademy.view.viewvideo.ViewCategory;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +21,7 @@ public class ViewMainMenu {
 
         System.out.println("1: Register");
         System.out.println("2: Login");
+        System.out.println("3: show list category");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -31,6 +32,9 @@ public class ViewMainMenu {
                 break;
             case 2:
                 formLogin();
+                break;
+            case 3:
+                new ViewCategory().formShowListCategory();
                 break;
             default:
                 System.out.println("Invalid choice");
@@ -135,6 +139,7 @@ public class ViewMainMenu {
         strRole.add(role);
         SinUpDTO sinUpDTO = new SinUpDTO(id, name, username, email, password, strRole);
         ResponseMessenger check_existed = userController.register(sinUpDTO);
+
         if (check_existed.getMessenger().equals("Username_Existed")) {
             System.out.println("Username the existed, try again!!!");
             fromRegister();

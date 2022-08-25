@@ -1,9 +1,10 @@
-package rikkei.accademy.view;
+package rikkei.accademy.view.viewuser;
 
 import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.UserController;
 import rikkei.accademy.model.RoleName;
 import rikkei.accademy.model.User;
+import rikkei.accademy.view.viewvideo.ViewCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class ViewHome {
         System.out.println("1: Log Out");
         System.out.println("2: User manage");
         System.out.println("3: Show list user");
+        System.out.println("4: Category manage");
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
@@ -50,6 +52,9 @@ public class ViewHome {
             case 3:
                 formShowListUser();
                 break;
+            case 4:
+                new ViewCategory().menuCategory();
+                break;
         }
         menuPm();
 
@@ -62,6 +67,7 @@ public class ViewHome {
         System.out.println("1: Log Out");
         System.out.println("2: Your Profile");
         System.out.println("3: Change password");
+        System.out.println("4: Show list Category");
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
             case 1:
@@ -75,6 +81,7 @@ public class ViewHome {
                 new ViewChangeProFile().formChangePassword();
                 break;
             case 4:
+                new ViewCategory().formShowListCategory();
                 break;
 
         }
@@ -89,6 +96,7 @@ public class ViewHome {
         System.out.println("1: Log Out");
         System.out.println("2: User manage");
         System.out.println("3: Show list user");
+        System.out.println("4: Category manage");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -102,6 +110,9 @@ public class ViewHome {
                 break;
             case 3:
                 formShowListUser();
+                break;
+            case 4:
+                new ViewCategory().menuCategory();
                 break;
         }
         menuAdmin();

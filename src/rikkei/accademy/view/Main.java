@@ -1,8 +1,9 @@
 package rikkei.accademy.view;
 
-import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.UserController;
 import rikkei.accademy.model.User;
+import rikkei.accademy.view.viewuser.ViewHome;
+import rikkei.accademy.view.viewuser.ViewMainMenu;
 
 public class Main {
     UserController userController = new UserController();
