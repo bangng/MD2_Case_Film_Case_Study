@@ -1,7 +1,12 @@
 package rikkei.accademy.service.user;
 
+import rikkei.accademy.model.Role;
+import rikkei.accademy.model.RoleName;
 import rikkei.accademy.model.User;
 import rikkei.accademy.service.IGenericService;
+
+import java.util.List;
+import java.util.Set;
 
 public interface IUserService extends IGenericService<User> {
     boolean existedByUserName(String username);
@@ -9,6 +14,11 @@ public interface IUserService extends IGenericService<User> {
     boolean checkLogin(String username, String password );
     User findByUserName(String username);
     User getCurrenUser();
+    void changeRole (int id, Set<Role> roles);
+    List<User> findByRole(RoleName... roleNames);
+    void changeStatus(int id);
+
+
 
 
 

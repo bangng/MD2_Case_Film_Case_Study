@@ -83,5 +83,48 @@ public class UserController {
     public void logOut(){
         new Config<User>().writeFile(Config.PATH_USER_PRINCIPAL,null);
     }
+    public void changeStatus(int id){
+        userService.changeStatus(id);
+    }
+    public User findById(int id){
+        return userService.findById(id);
+    }
+    public List<User> findByRoleName(RoleName... roleNames){
+        return userService.findByRole(roleNames);
+    }
+    public boolean existByEmail(String email){
+        return userService.existedByMail(email);
+    }
+    public void deleteUserById(int id){
+        userService.remove(id);
+    }
+    public void setRole(int id, Set<String> strRoles){
+        Set<Role> roles = new HashSet<>();
+        for (String role: strRoles) {
+            switch (role){
+                case "admin":
+                    roles.add(roleService.findByRoleName(RoleName.ADMIN));
+                    break;
+                case "pm":
+                    roles.add(roleService.findByRoleName(RoleName.PM));
+                    break;
+                case "user":
+                    roles.add(roleService.findByRoleName(RoleName.USER));
+                    break;
+
+            }
+        }
+        userService.changeRole(id,roles);
+    }
+
+    public void upDateProFile(User newUser){
+        User user = userService.findById(userService.getCurrenUser().getId());
+        user.setName(newUser.getName());
+        user.setUsername(newUser.getUsername());
+        user.setEmail(newUser.getEmail());
+        user.setPassword(newUser.getPassword());
+        new Config<User>().writeFile(Config.PATH_USER_PRINCIPAL,userService.findAll());
+    }
+
 
 }

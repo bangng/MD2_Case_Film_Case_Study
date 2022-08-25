@@ -1,9 +1,11 @@
 package rikkei.accademy.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class User implements Serializable {
+    static final long serialVersionUID = 1L;
 private int id;
 private String name;
 private String username;
@@ -31,6 +33,9 @@ private Set<Role> roles;
         this.avatar = avatar;
         this.status = status;
         this.roles = roles;
+    }
+    public RoleName getListRole(){
+        return new ArrayList<>(this.roles).get(0).getRoleName();
     }
 
     public int getId() {
@@ -96,6 +101,7 @@ private Set<Role> roles;
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 
     @Override
     public String toString() {

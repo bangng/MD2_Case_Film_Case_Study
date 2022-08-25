@@ -1,12 +1,16 @@
 package rikkei.accademy.service.user;
 
 import rikkei.accademy.config.Config;
+import rikkei.accademy.model.Role;
+import rikkei.accademy.model.RoleName;
 import rikkei.accademy.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class UserServiceIMPL implements IUserService{
+
     static String PATH_USER = "D:\\IdeaProjects\\MD2_Register_Role_2\\src\\rikkei\\accademy\\database\\user.txt";
     static List<User> userList = new Config<User>().readFile(PATH_USER);
 
@@ -21,6 +25,18 @@ public class UserServiceIMPL implements IUserService{
     public void save(User user) {
         userList.add(user);
         new Config<User>().writeFile(PATH_USER, userList);
+    }
+
+    @Override
+    public User findById(int id) {
+        return userList.stream().filter(user -> user.getId() == id).findAny().orElse(null);
+    }
+
+    @Override
+    public void remove(int id) {
+        userList.remove(findById(id));
+        new Config<User>().writeFile(PATH_USER,userList);
+
     }
 
     @Override
@@ -65,11 +81,39 @@ public class UserServiceIMPL implements IUserService{
 
     @Override
     public User getCurrenUser() {
-        if (new Config<User>().readFile(Config.PATH_USER_PRINCIPAL) != null){
+        if (new Config<User>().readFile(Config.PATH_USER_PRINCIPAL).size() != 0 ){
             User user = new Config<User>().readFile(Config.PATH_USER_PRINCIPAL).get(0);
             return user;
         }
         return null;
+
+    }
+
+    @Override
+    public void changeRole(int id, Set<Role> roles) {
+        findById(id).setRoles(roles);
+        new Config<User>().writeFile(PATH_USER,userList);
+    }
+
+    @Override
+    public List<User> findByRole(RoleName... roleNames) {
+        List<User> find = new ArrayList<>();
+        for (User user: userList) {
+            for (RoleName role: roleNames) {
+                if (user.getListRole() == role){
+                    find.add(user);
+            }
+        }
+
+        }
+        return find;
+    }
+
+    @Override
+    public void changeStatus(int id) {
+        User user = findById(id);
+        user.setStatus(!user.isStatus());
+        new Config<User>().writeFile(PATH_USER,userList);
 
     }
 

@@ -12,7 +12,7 @@ public class Main {
         if (currenUser == null){
             new ViewMainMenu().menu();
         }else {
-            new ViewHome().menu();
+            new ViewHome();
         }
 
     }

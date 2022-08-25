@@ -3,6 +3,7 @@ package rikkei.accademy.model;
 import java.io.Serializable;
 
 public class Role implements Serializable {
+    static final long serialVersionUID = 1L;
     private int id;
    private RoleName roleName;
 
