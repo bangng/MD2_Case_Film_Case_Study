@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ViewProfile {
+public class ViewUserManage {
     UserController userController = new UserController();
     User currenUser = userController.grtCurrenUser();
     List<User> userList = userController.getUserList();
@@ -22,6 +22,8 @@ public class ViewProfile {
         System.out.println("2: BlockUser");
         System.out.println("3: DeleteUser");
         System.out.println("4: Edit Profile");
+        System.out.println("5: Change password");
+        System.out.println("6: back");
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice) {
             case 1:
@@ -37,9 +39,19 @@ public class ViewProfile {
             case 4:
                 new ViewChangeProFile().menuProFile();
                 break;
+            case 5:
+                new ViewChangeProFile().formChangePassword();
+                break;
+            case 6:
+                this.backMenu();
+                break;
 
         }
+        menu();
 
+    }
+    private void backMenu(){
+        new ViewHome();
     }
 
   private void formChangeRole() {

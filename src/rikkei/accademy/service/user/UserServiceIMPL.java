@@ -18,6 +18,9 @@ public class UserServiceIMPL implements IUserService{
     @Override
     public List<User> findAll() {
         new Config<User>().writeFile(PATH_USER, userList);
+        List<User> list = new ArrayList<>();
+        list.add(getCurrenUser());
+        new Config<User>().writeFile(Config.PATH_USER_PRINCIPAL,list);
         return userList;
     }
 
@@ -81,12 +84,16 @@ public class UserServiceIMPL implements IUserService{
 
     @Override
     public User getCurrenUser() {
-        if (new Config<User>().readFile(Config.PATH_USER_PRINCIPAL).size() != 0 ){
-            User user = new Config<User>().readFile(Config.PATH_USER_PRINCIPAL).get(0);
-            return user;
+        List<User> userList1 = new Config<User>().readFile(Config.PATH_USER_PRINCIPAL);
+
+        if ( userList1 != null){
+            if (userList1.size() != 0){
+                User user = new Config<User>().readFile(Config.PATH_USER_PRINCIPAL).get(0);
+                return user;
+            }
+
         }
         return null;
-
     }
 
     @Override

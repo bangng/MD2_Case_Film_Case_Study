@@ -68,6 +68,7 @@ public class UserController {
     public ResponseMessenger login(SinUpDTO sinUpDTO){
         if (userService.checkLogin(sinUpDTO.getUsername(),sinUpDTO.getPassword())){
             User user = userService.findByUserName(sinUpDTO.getUsername());
+
             List<User> userLogin = new ArrayList<>();
             userLogin.add(user);
             new Config<User>().writeFile(Config.PATH_USER_PRINCIPAL,userLogin);

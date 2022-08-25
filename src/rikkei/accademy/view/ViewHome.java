@@ -2,7 +2,6 @@ package rikkei.accademy.view;
 
 import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.UserController;
-import rikkei.accademy.model.Role;
 import rikkei.accademy.model.RoleName;
 import rikkei.accademy.model.User;
 
@@ -36,7 +35,6 @@ public class ViewHome {
         System.out.println("*****************WELCOME*************************");
         System.out.println("Hello: " + roleName + " : " + currenUser.getName() );
         System.out.println("1: Log Out");
-
         System.out.println("2: User manage");
         System.out.println("3: Show list user");
 
@@ -63,8 +61,7 @@ public class ViewHome {
         System.out.println("Hello: "  + currenUser.getName());
         System.out.println("1: Log Out");
         System.out.println("2: Your Profile");
-
-
+        System.out.println("3: Change password");
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
             case 1:
@@ -74,6 +71,12 @@ public class ViewHome {
             case 2:
                 new ViewChangeProFile().menuProFile();
                 break;
+            case 3:
+                new ViewChangeProFile().formChangePassword();
+                break;
+            case 4:
+                break;
+
         }
         menuUser();
     }
@@ -84,9 +87,9 @@ public class ViewHome {
         System.out.println("*****************WELCOME*************************");
         System.out.println("Hello: " + roleName + " : " + currenUser.getName() );
         System.out.println("1: Log Out");
-
         System.out.println("2: User manage");
         System.out.println("3: Show list user");
+
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
@@ -111,7 +114,7 @@ public class ViewHome {
     }
 
     private void formUserManage() {
-       new ViewProfile().menu();
+       new ViewUserManage().menu();
 
     }
 }

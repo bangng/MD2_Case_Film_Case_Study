@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Config<T> {
-    public static String PATH_USER_PRINCIPAL = "D:\\IdeaProjects\\MD2_Validate_\\src\\rikkei\\academy\\database\\userprincipal.txt";
+    public static String PATH_USER_PRINCIPAL = "D:\\IdeaProjects\\MD2_Register_Role_2\\src\\rikkei\\accademy\\database\\user-principal.txt";
     public  static Scanner scanner(){
         Scanner scanner = new Scanner(System.in);
         return scanner;

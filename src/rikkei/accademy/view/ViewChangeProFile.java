@@ -20,9 +20,10 @@ public class ViewChangeProFile {
     
     public void menuProFile(){
         System.out.println("**************Change Profile****************");
-        System.out.println("Hello: "+currentUser .getName() + currentUser.getRoles());
+        System.out.println("Hello: "+currentUser .getName() +": "+currentUser.getEmail());
         System.out.println("1: Change name");
         System.out.println("2: Change email");
+        System.out.println("3: back");
         int choice = Config.scanner().nextInt();
         switch (choice){
             case 1:
@@ -31,7 +32,42 @@ public class ViewChangeProFile {
             case 2:
                 this.formChangeEmail();
                 break;
+            case 3:
+                this.backMenu();
+                break;
         }
+    }
+   public void formChangePassword(){
+        User user = userController.grtCurrenUser();
+        System.out.println("Enter password");
+        String password = Config.scanner().nextLine();
+        if (password.equals(user.getPassword()));
+        String newPassword;
+        boolean validatePassword;
+        while (true){
+            final String ANSI_RESET = "\u001B[0m";
+            final String ANSI_YELLOW = "\u001B[33m";
+            System.out.println("Enter new password");
+            System.out.println(ANSI_YELLOW + "Password must contain uppercare letters, lowercase letters, numbers and special characters"+ANSI_RESET);
+            newPassword = Config.scanner().nextLine();
+            validatePassword =  Pattern.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?.,:;_&])[A-Za-z\\d@$!%*?.,:;_&]{6,10}$", newPassword);
+            if (validatePassword){
+                break;
+            }else {
+                System.err.println("Password format error! Please enter the correct format!");
+
+            }
+        }
+        User user1 = new User(user.getId(),user.getName(),user.getUsername(),user.getEmail(),newPassword,user.getRoles());
+        userController.upDateProFile(user1);
+        System.out.println("Change password Success!!!!!");
+        userController.getUserList();
+
+
+
+    }
+    private void backMenu(){
+        new ViewHome();
     }
 
     private void formChangeEmail() {
@@ -57,6 +93,7 @@ public class ViewChangeProFile {
             System.out.println("Change Email Success!!!!");
         }
         userController.getUserList();
+        menuProFile();
 
 
     }
@@ -82,6 +119,7 @@ public class ViewChangeProFile {
         userController.upDateProFile(user1);
         System.out.println("Change name success!");
         userController.getUserList();
+        menuProFile();
 
     }
 }
