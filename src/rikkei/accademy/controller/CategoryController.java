@@ -23,9 +23,7 @@ public class CategoryController {
         categoryService.remove(id);
 
     }
-    public Category
-
-    detailCategory(int id){
+    public Category detailCategory(int id){
         return categoryService.findById(id);
     }
     public void editCategory(int id, Category category){

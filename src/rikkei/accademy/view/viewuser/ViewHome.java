@@ -5,6 +5,7 @@ import rikkei.accademy.controller.UserController;
 import rikkei.accademy.model.RoleName;
 import rikkei.accademy.model.User;
 import rikkei.accademy.view.viewvideo.ViewCategory;
+import rikkei.accademy.view.viewvideo.ViewVideo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,8 @@ public class ViewHome {
         System.out.println("2: User manage");
         System.out.println("3: Show list user");
         System.out.println("4: Category manage");
+        System.out.println("5: Video manage");
+        System.out.println("6: Back");
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
@@ -55,6 +58,12 @@ public class ViewHome {
             case 4:
                 new ViewCategory().menuCategory();
                 break;
+            case 5:
+                new ViewVideo().menuVideo();
+                break;
+            case 6:
+                new ViewMainMenu().menu();
+                break;
         }
         menuPm();
 
@@ -68,6 +77,8 @@ public class ViewHome {
         System.out.println("2: Your Profile");
         System.out.println("3: Change password");
         System.out.println("4: Show list Category");
+        System.out.println("5: Show list Video");
+        System.out.println("6: Back");
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
             case 1:
@@ -83,6 +94,11 @@ public class ViewHome {
             case 4:
                 new ViewCategory().formShowListCategory();
                 break;
+            case 5:
+                break;
+            case 6:
+                new ViewMainMenu().menu();
+                break;
 
         }
         menuUser();
@@ -97,6 +113,8 @@ public class ViewHome {
         System.out.println("2: User manage");
         System.out.println("3: Show list user");
         System.out.println("4: Category manage");
+        System.out.println("5: Video manage");
+        System.out.println("6: Back");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -113,6 +131,12 @@ public class ViewHome {
                 break;
             case 4:
                 new ViewCategory().menuCategory();
+                break;
+            case 5:
+                new ViewVideo().menuVideo();
+                break;
+            case 6:
+                new ViewMainMenu().menu();
                 break;
         }
         menuAdmin();

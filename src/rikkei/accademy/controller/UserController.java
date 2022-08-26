@@ -118,13 +118,15 @@ public class UserController {
         userService.changeRole(id,roles);
     }
 
-    public void upDateProFile(User newUser){
-        User user = userService.findById(userService.getCurrenUser().getId());
-        user.setName(newUser.getName());
-        user.setUsername(newUser.getUsername());
-        user.setEmail(newUser.getEmail());
-        user.setPassword(newUser.getPassword());
-        new Config<User>().writeFile(Config.PATH_USER_PRINCIPAL,userService.findAll());
+    public void upDateProFile(User user){
+        userService.changeProFile(user);
+
+//        User user = userService.findById(userService.getCurrenUser().getId());
+//        user.setName(newUser.getName());
+//        user.setUsername(newUser.getUsername());
+//        user.setEmail(newUser.getEmail());
+//        user.setPassword(newUser.getPassword());
+//        new Config<User>().writeFile(Config.PATH_USER_PRINCIPAL,userService.findAll());
     }
 
 

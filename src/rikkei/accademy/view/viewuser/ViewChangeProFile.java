@@ -107,10 +107,7 @@ public class ViewChangeProFile {
                 break;
             } else {
                 System.out.println("the name failed! please try again!");
-
             }
-
-
         }
         User user1 = new User(user.getId(),name,user.getUsername(),user.getEmail(),user.getPassword(),user.getRoles());
         userController.upDateProFile(user1);

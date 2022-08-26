@@ -17,7 +17,8 @@ public class ViewCategory {
         System.out.println("2: Create Category");
         System.out.println("3: Delete category");
         System.out.println("4: Edit Category");
-        System.out.println("5: Back ");
+        System.out.println("5: Detail Category");
+        System.out.println("6: Back ");
 
 
         int choice = Config.scanner().nextInt();
@@ -35,8 +36,10 @@ public class ViewCategory {
                 formEditCategory();
                 break;
             case 5:
+                detailCategory();
+                break;
+            case 6:
                 new ViewHome();
-
                 break;
             default:
                 System.out.println("Invalid choice");
@@ -72,8 +75,8 @@ public class ViewCategory {
         if (categoryController.detailCategory(idCategory) == null){
             System.out.println("Not found");
         }else {
-            System.out.println("Enter yes to delete or no to not delete");
-            int choiceDelete = Config.scanner().nextInt();
+            System.out.println("Enter 1 to delete or 2 to not delete");
+           int choiceDelete = Config.scanner().nextInt();
             switch (choiceDelete){
                 case 1:
                     categoryController.deleteCategory(idCategory);

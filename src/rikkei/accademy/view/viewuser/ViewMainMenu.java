@@ -7,6 +7,7 @@ import rikkei.accademy.dto.response.ResponseMessenger;
 import rikkei.accademy.model.User;
 import rikkei.accademy.view.viewuser.ViewHome;
 import rikkei.accademy.view.viewvideo.ViewCategory;
+import rikkei.accademy.view.viewvideo.ViewVideo;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ public class ViewMainMenu {
         System.out.println("1: Register");
         System.out.println("2: Login");
         System.out.println("3: show list category");
+        System.out.println("4: Show list Video");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -35,6 +37,9 @@ public class ViewMainMenu {
                 break;
             case 3:
                 new ViewCategory().formShowListCategory();
+                break;
+            case 4:
+                new ViewVideo().formShowListVideo();
                 break;
             default:
                 System.out.println("Invalid choice");

@@ -17,6 +17,7 @@ public interface IUserService extends IGenericService<User> {
     void changeRole (int id, Set<Role> roles);
     List<User> findByRole(RoleName... roleNames);
     void changeStatus(int id);
+    void changeProFile(User user);
 
 
 

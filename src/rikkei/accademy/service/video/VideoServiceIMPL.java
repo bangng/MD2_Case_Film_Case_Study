@@ -1,6 +1,7 @@
 package rikkei.accademy.service.video;
 
 import rikkei.accademy.config.Config;
+import rikkei.accademy.model.User;
 import rikkei.accademy.model.VideoModel.Category;
 import rikkei.accademy.model.VideoModel.Video;
 
@@ -35,9 +36,16 @@ public class VideoServiceIMPL implements IVideoService{
 
     }
 
+
     @Override
-    public void editVideo(String name, List<Category> categories) {
-
-
+    public void updateVideo(Video video) {
+     Video video1 = findById(video.getId());
+     video1.setNameVideo(video.getNameVideo());
+     video1.setDateByVideo(video.getDateByVideo());
+     video1.setCountry(video.getCountry());
+     video1.setCategories(video.getCategories());
+        new Config<Video>().writeFile(PATH_VIDEO,videoList);
     }
+
+
 }
