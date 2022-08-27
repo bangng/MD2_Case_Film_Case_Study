@@ -85,7 +85,7 @@ public class ViewVideo {
         String searchName = Config.scanner().nextLine();
         if (searchName.trim().equals("")) {
             System.out.println("Not found");
-        } else if (!videoController.searchVideoWithName(searchName).contains(searchName.toLowerCase())){
+        } else if (videoController.searchVideoWithName(searchName).size() == 0){
             System.out.println("không có luôn");
 
         }else {
