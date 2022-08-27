@@ -1,5 +1,8 @@
 package rikkei.accademy.model;
 
+import rikkei.accademy.model.role.Role;
+import rikkei.accademy.model.role.RoleName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;

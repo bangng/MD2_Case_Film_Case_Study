@@ -2,10 +2,8 @@ package rikkei.accademy.view.viewuser;
 
 import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.UserController;
-import rikkei.accademy.model.RoleName;
+import rikkei.accademy.model.role.RoleName;
 import rikkei.accademy.model.User;
-import rikkei.accademy.view.viewuser.ViewChangeProFile;
-import rikkei.accademy.view.viewuser.ViewHome;
 
 import java.util.ArrayList;
 import java.util.HashSet;

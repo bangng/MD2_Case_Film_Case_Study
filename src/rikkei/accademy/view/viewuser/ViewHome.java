@@ -2,7 +2,7 @@ package rikkei.accademy.view.viewuser;
 
 import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.UserController;
-import rikkei.accademy.model.RoleName;
+import rikkei.accademy.model.role.RoleName;
 import rikkei.accademy.model.User;
 import rikkei.accademy.view.viewvideo.ViewCategory;
 import rikkei.accademy.view.viewvideo.ViewVideo;
@@ -41,7 +41,7 @@ public class ViewHome {
         System.out.println("3: Show list user");
         System.out.println("4: Category manage");
         System.out.println("5: Video manage");
-        System.out.println("6: Back");
+
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
@@ -61,9 +61,8 @@ public class ViewHome {
             case 5:
                 new ViewVideo().menuVideo();
                 break;
-            case 6:
-                new ViewMainMenu().menu();
-                break;
+            default:
+                System.out.println("Invalid choice");
         }
         menuPm();
 
@@ -78,7 +77,11 @@ public class ViewHome {
         System.out.println("3: Change password");
         System.out.println("4: Show list Category");
         System.out.println("5: Show list Video");
-        System.out.println("6: Back");
+        System.out.println("6: Show video with category");
+        System.out.println("7: Top View Video");
+        System.out.println("8: Show phim lẻ");
+        System.out.println("9: Show phim bộ");
+
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
             case 1:
@@ -95,11 +98,22 @@ public class ViewHome {
                 new ViewCategory().formShowListCategory();
                 break;
             case 5:
+                new ViewVideo().formShowListVideo();
                 break;
             case 6:
-                new ViewMainMenu().menu();
+                new ViewVideo().formVideoWithCategory();
                 break;
-
+            case 7:
+                new ViewVideo().formTopViewVideo();
+                break;
+            case 8:
+                new ViewVideo().formShowFilm();
+                break;
+            case 9:
+                new ViewVideo().formShowSeriesFilm();
+                break;
+            default:
+                System.out.println("Invalid choice");
         }
         menuUser();
     }
@@ -114,7 +128,7 @@ public class ViewHome {
         System.out.println("3: Show list user");
         System.out.println("4: Category manage");
         System.out.println("5: Video manage");
-        System.out.println("6: Back");
+
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -135,9 +149,8 @@ public class ViewHome {
             case 5:
                 new ViewVideo().menuVideo();
                 break;
-            case 6:
-                new ViewMainMenu().menu();
-                break;
+            default:
+                System.out.println("Invalid choice");
         }
         menuAdmin();
     }

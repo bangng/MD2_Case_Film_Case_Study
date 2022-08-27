@@ -115,9 +115,9 @@ public class ViewCategory {
     private void formCreateCategory() {
         System.out.println("Enter Category ");
         String categoryName = "";
-        while (!categoryName.matches("(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})")) {
+        while (!categoryName.matches("(^[A-Za-z]{1,16})([ ]{0,1})([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})")) {
             categoryName = Config.scanner().nextLine();
-            if (!categoryName.matches("(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})")) {
+            if (!categoryName.matches("(^[A-Za-z]{1,16})([ ]{0,1})([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})")) {
                 System.out.println("Invalid name");
             }
         }

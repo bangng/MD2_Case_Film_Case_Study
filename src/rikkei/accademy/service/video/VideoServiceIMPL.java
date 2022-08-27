@@ -5,6 +5,8 @@ import rikkei.accademy.model.User;
 import rikkei.accademy.model.VideoModel.Category;
 import rikkei.accademy.model.VideoModel.Video;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class VideoServiceIMPL implements IVideoService{
@@ -44,7 +46,62 @@ public class VideoServiceIMPL implements IVideoService{
      video1.setDateByVideo(video.getDateByVideo());
      video1.setCountry(video.getCountry());
      video1.setCategories(video.getCategories());
+     video1.setSeriesVideo(video.isSeriesVideo());
         new Config<Video>().writeFile(PATH_VIDEO,videoList);
+    }
+
+    @Override
+    public List<Video> sortByView() {
+        List<Video> view = new ArrayList<>();
+        for (int i = 0; i < videoList.size(); i++) {
+            view.add(videoList.get(i));
+        }
+        Collections.sort(view);
+        List<Video> topView = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            topView.add(view.get(i));
+        }
+
+        return topView;
+    }
+
+    @Override
+    public List<Video> seriesVideo() {
+        List<Video> phimBo = new ArrayList<>();
+        for (int i = 0; i < videoList.size(); i++) {
+            if (videoList.get(i).isSeriesVideo() == true){
+                phimBo.add(videoList.get(i));
+            }
+        }
+        return phimBo;
+    }
+
+    @Override
+    public List<Video> video() {
+        List<Video> phimLe = new ArrayList<>();
+        for (int i = 0; i < videoList.size(); i++) {
+            if (videoList.get(i).isSeriesVideo() == false){
+                phimLe.add(videoList.get(i));
+            }
+        }
+        return phimLe;
+    }
+
+    @Override
+    public List<Video> searchVideoWithCategory() {
+        return null;
+    }
+
+    @Override
+    public List<Video> searchVideoWithName(String name) {
+        List<Video> searchWithName = new ArrayList<>();
+
+        for (int i = 0; i < videoList.size(); i++) {
+            if (videoList.get(i).getNameVideo().toLowerCase().contains(name.toLowerCase()) ){
+                searchWithName.add(videoList.get(i));
+            }
+        }
+        return searchWithName;
     }
 
 

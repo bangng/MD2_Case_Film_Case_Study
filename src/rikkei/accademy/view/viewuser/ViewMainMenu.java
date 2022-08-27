@@ -24,6 +24,10 @@ public class ViewMainMenu {
         System.out.println("2: Login");
         System.out.println("3: show list category");
         System.out.println("4: Show list Video");
+        System.out.println("5: Show phim bộ");
+        System.out.println("6: Show phim lẻ");
+        System.out.println("7: Top View Video");
+        System.out.println("8: Show Video with category");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -41,6 +45,19 @@ public class ViewMainMenu {
             case 4:
                 new ViewVideo().formShowListVideo();
                 break;
+            case 5:
+                new ViewVideo().formShowSeriesFilm();
+                break;
+            case 6:
+                new ViewVideo().formShowFilm();
+                break;
+            case 7:
+                new ViewVideo().formTopViewVideo();
+                break;
+            case 8:
+                new ViewVideo().formVideoWithCategory();
+                break;
+
             default:
                 System.out.println("Invalid choice");
         }
@@ -152,7 +169,7 @@ public class ViewMainMenu {
             System.out.println("Email the existed, try again!!!");
             fromRegister();
         } else if (check_existed.getMessenger().equals("Create success")) {
-            System.out.println("checkList: " + userController.getUserList());
+            System.out.println("Hello");
         }
 
 

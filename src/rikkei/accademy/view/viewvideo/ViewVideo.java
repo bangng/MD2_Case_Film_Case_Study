@@ -27,7 +27,11 @@ public class ViewVideo {
         System.out.println("4: Update video");
         System.out.println("5: Detail Video");
         System.out.println("6: Show list video with category");
-        System.out.println("7: Back");
+        System.out.println("7: Top View Video");
+        System.out.println("8: Show phim lẻ");
+        System.out.println("9: Show Phim Bộ");
+        System.out.println("10: Search by name");
+        System.out.println("11: Back");
 
         int choice = 0;
         try {
@@ -56,6 +60,18 @@ public class ViewVideo {
                 formVideoWithCategory();
                 break;
             case 7:
+                formTopViewVideo();
+                break;
+            case 8:
+                formShowFilm();
+                break;
+            case 9:
+                formShowSeriesFilm();
+                break;
+            case 10:
+                formSearchFilmWithName();
+                break;
+            case 11:
                 new ViewHome();
                 break;
 
@@ -63,18 +79,50 @@ public class ViewVideo {
         menuVideo();
     }
 
+    public void formSearchFilmWithName() {
+        System.out.println("**************Search by name********************");
+        System.out.println("Enter name");
+        String searchName = Config.scanner().nextLine();
+        if (searchName.trim().equals("")) {
+            System.out.println("Not found");
+        } else if (!videoController.searchVideoWithName(searchName).contains(searchName.toLowerCase())){
+            System.out.println("không có luôn");
+
+        }else {
+            System.out.println(videoController.searchVideoWithName(searchName));
+        }
+
+//        videoController.getListVideo();
+
+    }
+
+    public void formTopViewVideo() {
+        System.out.println("********************TOP VIEW*********************");
+        for (int i = 0; i < videoController.topView().size(); i++) {
+            System.out.println("Video: " + videoController.topView().get(i).getNameVideo() + " view: " + videoController.topView().get(i).getView());
+        }
+        videoController.getListVideo();
+    }
+
     private void formDetailVideo() {
+        formShowListVideo();
         System.out.println("Enter id Video");
         int idDetail = Config.scanner().nextInt();
-        if (videoController.findByIdVideo(idDetail) == null){
+        if (videoController.findByIdVideo(idDetail) == null) {
             System.out.println("Not Found");
-        }else {
+        } else {
             Video video = videoController.findByIdVideo(idDetail);
+            video.setView(video.getView() + 1);
+            videoController.getListVideo();
+            System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-20s%-15s%n", "ID", "VideoName", "View", "DateByVideo", "DateToUp", "Country", "Category", "isSeries");
+            System.out.printf("%-15d%-15s%-15s%-15s%-15s%-15s%-20s%-15s%n", video.getId(), video.getNameVideo(), video.getView(), video.getDateByVideo(), video.getDateToUp(), video.getCountry(), video.getCategories().stream().map(Category::getCategory).collect(Collectors.toList()), video.isSeriesVideo() ? "Phim bộ" : "Phim Lẻ");
+
             System.out.println(video);
         }
+//        formDetailVideo();
         System.out.println("Enter quit to back or another enter key to continue");
         String backMenu = Config.scanner().nextLine();
-        if (backMenu.equalsIgnoreCase("quit")){
+        if (backMenu.equalsIgnoreCase("quit")) {
             menuVideo();
         }
     }
@@ -83,45 +131,59 @@ public class ViewVideo {
 
         System.out.println("Enter idVideo to edit");
         int idEdit = Config.scanner().nextInt();
-        if (videoController.findByIdVideo(idEdit) == null){
+        if (videoController.findByIdVideo(idEdit) == null) {
             System.out.println("not found");
-        }else {
-           Video video = videoController.findByIdVideo(idEdit);
+        } else {
+            Video video = videoController.findByIdVideo(idEdit);
             System.out.println("OLD videoName: " + video.getNameVideo());
-            System.out.println("OLD NSX: " +video.getDateByVideo());
-            System.out.println("OLD Country: "+video.getCountry());
-            System.out.println("OLD Category: "+video.getCategories().stream().map(Category::getCategory).collect(Collectors.toList()));
-            System.out.println("OLD isSeries: " + video.isSeriesVideo()) ;
+            System.out.println("OLD NSX: " + video.getDateByVideo());
+            System.out.println("OLD Country: " + video.getCountry());
+            System.out.println("OLD Category: " + video.getCategories().stream().map(Category::getCategory).collect(Collectors.toList()));
+            System.out.println("OLD isSeries: " + video.isSeriesVideo());
 
             System.out.println("Enter new name to edit");
             String newNameVideo = Config.scanner().nextLine();
-            if (!newNameVideo.trim().equals("")){
+            if (newNameVideo.trim().equals("")) {
                 video.setNameVideo(newNameVideo);
-                return;
+
             }
             System.out.println("Thêm mới ngày sản xuất cho phim");
             String newNsx = Config.scanner().nextLine();
-            if (!newNsx.trim().equals("")){
+            if (newNsx.trim().equals("")) {
                 video.setDateByVideo(newNsx);
-                return;
+
             }
             LocalDate dateToUp = LocalDate.now();
             System.out.println("Enter new country");
             String newCountry = Config.scanner().nextLine();
-            if (!newCountry.trim().equals("")){
+            if (newCountry.trim().equals("")) {
                 video.setCountry(newCountry);
-                return;
+
             }
-            System.out.println("Enter category want to edit");
-            List<Category> listSelectCategory = new ArrayList<>();
-            selectCategory(listSelectCategory);
+            List<Category> categoryList = video.getCategories();
+            for (int i = 0; i < video.getCategories().size(); i++) {
+                System.out.println(categoryList);
+            }
+            System.out.println("Enter id category want to edit");
+            int idCategory = Config.scanner().nextInt();
+            System.out.println(categoryController.getListCategory());
+            ;
+            System.out.println("Enter id category to edit");
+            int idToEdit = Config.scanner().nextInt();
+            for (int i = 0; i < categoryList.size(); i++) {
+                if (categoryList.get(i).getId() == idCategory) {
+                    categoryList.set(i, categoryController.detailCategory(idToEdit));
+                }
+
+            }
             System.out.println("Phim bộ 1 or phim lẻ 2");
             int phim = Config.scanner().nextInt();
             boolean series = false;
             if (phim == 1) {
                 series = true;
             }
-            Video video1 = new Video(video.getId(),newNameVideo, 0, newNsx,dateToUp, newCountry, listSelectCategory,series);
+
+            Video video1 = new Video(video.getId(), newNameVideo, 0, newNsx, dateToUp, newCountry, categoryList, series);
             videoController.editVideo(video1);
 
 
@@ -132,19 +194,19 @@ public class ViewVideo {
     private void formDeleteVideo() {
         System.out.println("Enter id video to delete");
         int idVideo = Config.scanner().nextInt();
-        if (videoController.findByIdVideo(idVideo) == null){
+        if (videoController.findByIdVideo(idVideo) == null) {
             System.out.println("Not found");
-        }else {
+        } else {
             System.out.println("Enter 1 to delete or 2 to not delete");
             int choiceDelete = Config.scanner().nextInt();
-            switch (choiceDelete){
+            switch (choiceDelete) {
                 case 1:
-                   videoController.deleteVideo(idVideo);
+                    videoController.deleteVideo(idVideo);
                     formShowListVideo();
-                   videoController.getListVideo();
+                    videoController.getListVideo();
                     break;
                 case 2:
-                   menuVideo();
+                    menuVideo();
                     break;
             }
         }
@@ -152,22 +214,23 @@ public class ViewVideo {
 
 
     //    Chưa làm xong
-    private void formVideoWithCategory() {
+    public void formVideoWithCategory() {
         for (int i = 0; i < categories.size(); i++) {
             System.out.println("**" + categories.get(i).getId() + "**" + categories.get(i).getCategory());
         }
         System.out.println("Enter id category");
         int idCategory = Config.scanner().nextInt();
-        videoController.showVideoWithCategory(idCategory);
 
+//        videoController.showVideoWithCategory(idCategory);
 
-
-
+        for (Video video :
+                videoController.showVideoWithCategory(idCategory)) {
+            System.out.println(video);
+        }
         videoController.getListVideo();
-
-
     }
-// chưa làm song phần trên
+
+    // chưa làm song phần trên
     private void formCreateVideo() {
 
         int lastId;
@@ -178,9 +241,9 @@ public class ViewVideo {
         }
         System.out.println("Enter Video Name ");
         String videoName = "";
-        while (!videoName.matches("(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})")) {
+        while (!videoName.matches("(^[A-Za-z]{1,16})([ ]{0,1})([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})")) {
             videoName = Config.scanner().nextLine();
-            if (!videoName.matches("(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})")) {
+            if (!videoName.matches("(^[A-Za-z]{1,16})([ ]{0,1})([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})")) {
                 System.out.println("Invalid name");
             }
         }
@@ -196,9 +259,9 @@ public class ViewVideo {
 
         System.out.println("Enter Country");
         String videoCountry = "";
-        while (!videoCountry.matches("(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})")) {
+        while (!videoCountry.matches("(^[A-Za-z]{1,16})([ ]{0,1})([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})")) {
             videoCountry = Config.scanner().nextLine();
-            if (!videoCountry.matches("(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})")) {
+            if (!videoCountry.matches("(^[A-Za-z]{1,16})([ ]{0,1})([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})?([ ]{0,1})?([A-Za-z]{1,16})")) {
                 System.out.println("Invalid name");
             }
         }
@@ -240,10 +303,25 @@ public class ViewVideo {
 
     public void formShowListVideo() {
         System.out.println("****************************LIST VIDEO*****************************");
+
         System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-20s%-15s%n", "ID", "VideoName", "View", "DateByVideo", "DateToUp", "Country", "Category", "isSeries");
         for (Video video : videoList) {
             System.out.printf("%-15d%-15s%-15s%-15s%-15s%-15s%-20s%-15s%n", video.getId(), video.getNameVideo(), video.getView(), video.getDateByVideo(), video.getDateToUp(), video.getCountry(), video.getCategories().stream().map(Category::getCategory).collect(Collectors.toList()), video.isSeriesVideo() ? "Phim bộ" : "Phim Lẻ");
         }
 
+    }
+
+    public void formShowFilm() {
+        System.out.println("*********** LIST PHIM LẺ******************");
+        for (int i = 0; i < videoController.phimLe().size(); i++) {
+            System.out.println(videoController.phimLe().get(i).getNameVideo() + ": Là: " + (videoController.phimLe().get(i).isSeriesVideo() ? "Phim bộ" : "Phim Lẻ"));
+        }
+    }
+
+    public void formShowSeriesFilm() {
+        System.out.println("************** LIST PHIM BỘ******************");
+        for (int i = 0; i < videoController.phimBo().size(); i++) {
+            System.out.println(videoController.phimBo().get(i).getNameVideo() + ": Là: " + (videoController.phimBo().get(i).isSeriesVideo() ? "Phim Bộ" : "Phim Lẻ"));
+        }
     }
 }

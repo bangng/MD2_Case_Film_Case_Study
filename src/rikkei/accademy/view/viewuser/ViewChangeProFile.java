@@ -45,9 +45,9 @@ public class ViewChangeProFile {
             final String ANSI_RESET = "\u001B[0m";
             final String ANSI_YELLOW = "\u001B[33m";
             System.out.println("Enter new password");
-            System.out.println(ANSI_YELLOW + "Password must contain uppercare letters, lowercase letters, numbers and special characters"+ANSI_RESET);
+//            System.out.println(ANSI_YELLOW + "Password must contain uppercare letters, lowercase letters, numbers and special characters"+ANSI_RESET);
             newPassword = Config.scanner().nextLine();
-            validatePassword =  Pattern.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?.,:;_&])[A-Za-z\\d@$!%*?.,:;_&]{6,10}$", newPassword);
+            validatePassword =  Pattern.matches("[a-zA-Z0-9]{1,40}", newPassword);
             if (validatePassword){
                 break;
             }else {

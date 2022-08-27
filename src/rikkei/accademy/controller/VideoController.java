@@ -41,7 +41,7 @@ public class VideoController {
         List<Video> videoList = new ArrayList<>();
         for (Video video: videoService.findAll()) {
             for (Category category: video.getCategories()) {
-                if (category1 == category){
+                if (category1.getId() == category.getId()){
                     videoList.add(video);
                 }
             }
@@ -52,5 +52,17 @@ public class VideoController {
 
     public void editVideo(Video video1) {
         videoService.updateVideo(video1);
+    }
+    public List<Video> topView(){
+        return videoService.sortByView();
+    }
+    public List<Video> phimBo(){
+        return videoService.seriesVideo();
+    }
+    public List<Video> phimLe(){
+        return videoService.video();
+    }
+    public List<Video> searchVideoWithName(String name){
+        return videoService.searchVideoWithName(name);
     }
 }

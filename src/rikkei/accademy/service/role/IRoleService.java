@@ -1,7 +1,7 @@
 package rikkei.accademy.service.role;
 
-import rikkei.accademy.model.Role;
-import rikkei.accademy.model.RoleName;
+import rikkei.accademy.model.role.Role;
+import rikkei.accademy.model.role.RoleName;
 
 import java.util.List;
 

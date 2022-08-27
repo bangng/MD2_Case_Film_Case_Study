@@ -1,4 +1,4 @@
-package rikkei.accademy.model;
+package rikkei.accademy.model.role;
 
 public enum RoleName {
     ADMIN,

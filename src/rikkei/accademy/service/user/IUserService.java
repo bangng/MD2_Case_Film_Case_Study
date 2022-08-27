@@ -1,7 +1,7 @@
 package rikkei.accademy.service.user;
 
-import rikkei.accademy.model.Role;
-import rikkei.accademy.model.RoleName;
+import rikkei.accademy.model.role.Role;
+import rikkei.accademy.model.role.RoleName;
 import rikkei.accademy.model.User;
 import rikkei.accademy.service.IGenericService;
 

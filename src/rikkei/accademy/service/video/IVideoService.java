@@ -7,5 +7,15 @@ import rikkei.accademy.service.IGenericService;
 import java.util.List;
 
 public interface IVideoService extends IGenericService<Video> {
-void updateVideo(Video video);
+    void updateVideo(Video video);
+
+    List<Video> sortByView();
+
+    List<Video> seriesVideo();
+
+    List<Video> video();
+
+    List<Video> searchVideoWithCategory();
+
+    List<Video> searchVideoWithName(String name);
 }

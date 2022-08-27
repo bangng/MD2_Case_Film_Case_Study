@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
-public class Video implements Serializable{
+public class Video implements Serializable, Comparable<Video>{
     static final long serialVersionUID = 1L;
     private int id;
     private String nameVideo;
@@ -108,5 +108,10 @@ public class Video implements Serializable{
                 ", seriesVideo=" + seriesVideo +
 
                 '}';
+    }
+
+    @Override
+    public int compareTo(Video o) {
+        return o.getView() - this.getView();
     }
 }
