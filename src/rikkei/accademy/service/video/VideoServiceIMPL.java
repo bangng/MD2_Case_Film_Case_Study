@@ -4,12 +4,15 @@ import rikkei.accademy.config.Config;
 import rikkei.accademy.model.User;
 import rikkei.accademy.model.VideoModel.Category;
 import rikkei.accademy.model.VideoModel.Video;
+import rikkei.accademy.service.categoryvideo.CategoryServiceIMPL;
+import rikkei.accademy.service.categoryvideo.ICategoryService;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class VideoServiceIMPL implements IVideoService{
+    ICategoryService categoryService = new CategoryServiceIMPL();
     static String PATH_VIDEO = "D:\\IdeaProjects\\MD2_Register_Role_2\\src\\rikkei\\accademy\\database\\video.txt";
     static List<Video> videoList = new Config<Video>().readFile(PATH_VIDEO);
     @Override
@@ -87,10 +90,7 @@ public class VideoServiceIMPL implements IVideoService{
         return phimLe;
     }
 
-    @Override
-    public List<Video> searchVideoWithCategory() {
-        return null;
-    }
+
 
     @Override
     public List<Video> searchVideoWithName(String name) {
@@ -103,5 +103,21 @@ public class VideoServiceIMPL implements IVideoService{
         }
         return searchWithName;
     }
+
+//    @Override
+//    public List<Video> searchVideoWithCategory(Category category) {
+//        List<Video> videos = new ArrayList<>();
+//        for (Video video: videoList) {
+//            for (Category category1: categoryService.findAll()) {
+//                if (category.getId() == category1.getId()){
+//                    videos.add(video);
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return videos;
+//    }
+
 
 }

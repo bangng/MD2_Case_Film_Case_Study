@@ -37,16 +37,14 @@ public class VideoController {
 
 
     public List<Video> showVideoWithCategory(int id){
-        Category category1 = categoryService.findById(id);
         List<Video> videoList = new ArrayList<>();
         for (Video video: videoService.findAll()) {
             for (Category category: video.getCategories()) {
-                if (category1.getId() == category.getId()){
+                if (id == category.getId()){
                     videoList.add(video);
                 }
             }
         }
-
         return videoList;
     }
 
@@ -65,4 +63,12 @@ public class VideoController {
     public List<Video> searchVideoWithName(String name){
         return videoService.searchVideoWithName(name);
     }
+//    public List<Video> filmByDate(){
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy '@'hh:mm a");
+//        Collections.sort(datestring, (s1, s2) -> LocalDateTime.parse(s1, formatter).
+//                compareTo(LocalDateTime.parse(s2, formatter)));
+//
+//    }
+
+
 }

@@ -41,7 +41,8 @@ public class ViewVideo {
         System.out.println("11: Search Film by category");
         System.out.println("12: Like video");
         System.out.println("13: Top Like");
-        System.out.println("14: Back");
+        System.out.println("14: List film by date");
+        System.out.println("15: Back");
 
         int choice = 0;
         try {
@@ -82,7 +83,7 @@ public class ViewVideo {
                 formSearchFilmWithName();
                 break;
             case 11:
-                formSearchFilmWithCategory();
+                formVideoWithCategory();
                 break;
             case 12:
                 formLikeVideo();
@@ -91,12 +92,20 @@ public class ViewVideo {
                 formTopLikeVideo();
                 break;
             case 14:
+                formVideoByDate();
+                break;
+            case 15:
                 new ViewHome();
                 break;
 
         }
         menuVideo();
     }
+
+    private void formVideoByDate() {
+
+    }
+
 
     public void formTopLikeVideo() {
         for(int id : likeController.topLike()){
@@ -139,8 +148,13 @@ public class ViewVideo {
         }
     }
 
-    public void formSearchFilmWithCategory() {
-    }
+//    public void formSearchFilmWithCategory() {
+//        System.out.println("*******************Search by Category******************");
+//        System.out.println(categoryController.getListCategory());
+//        System.out.println("Enter id category");
+//        int idCategory = Config.scanner().nextInt();
+//        videoController.showVideoWithCategory(idCategory);
+//    }
 
     public void formSearchFilmWithName() {
         System.out.println("**************Search by name********************");
@@ -287,28 +301,25 @@ public class ViewVideo {
     }
 
 
-    //    Chưa làm xong
+
     public void formVideoWithCategory() {
         for (int i = 0; i < categories.size(); i++) {
             System.out.println("**" + categories.get(i).getId() + "**" + categories.get(i).getCategory());
         }
         System.out.println("Enter id category");
         int idCategory = Config.scanner().nextInt();
+//       videoController.showVideoWithCategory(idCategory);
+        for (Video video : videoController.showVideoWithCategory(idCategory)) {
 
-//        videoController.showVideoWithCategory(idCategory);
-
-        for (Video video :
-                videoController.showVideoWithCategory(idCategory)) {
-
-            if (video == null){
+            if (video.getNameVideo() == null){
                 System.out.println("Not found!!!!");
             }
-            System.out.println(video);
+            System.out.println("name: " +video.getNameVideo());
         }
         videoController.getListVideo();
     }
 
-    // chưa làm song phần trên
+
     private void formCreateVideo() {
 
         int lastId;

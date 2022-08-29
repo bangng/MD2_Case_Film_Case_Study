@@ -64,7 +64,7 @@ public class ViewMainMenu {
                 new ViewVideo().formSearchFilmWithName();
                 break;
             case 10:
-                new ViewVideo().formSearchFilmWithCategory();
+                new ViewVideo().formVideoWithCategory();
                 break;
             case 11:
                 new ViewVideo().formTopLikeVideo();

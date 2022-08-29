@@ -20,7 +20,7 @@ public class Video implements Serializable, Comparable<Video>{
     public Video() {
     }
 
-    public Video(int id, String nameVideo, int view, String dateByVideo, LocalDate dateToUp, String country, List<Category> categories, boolean seriesVideo) {
+    public Video(int id, String nameVideo, int view,String dateByVideo, LocalDate dateToUp, String country, List<Category> categories, boolean seriesVideo) {
         this.id = id;
         this.nameVideo = nameVideo;
         this.view = view;
@@ -112,6 +112,14 @@ public class Video implements Serializable, Comparable<Video>{
 
     @Override
     public int compareTo(Video o) {
-        return o.getView() - this.getView();
+        return 0;
     }
+
+//    @Override
+//    public int compareTo(Video o) {
+////
+//        return o;
+////        return o.getDateByVideo() - this.getDateByVideo();
+//    }
+
 }

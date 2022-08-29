@@ -5,6 +5,7 @@ import rikkei.accademy.controller.UserController;
 import rikkei.accademy.model.role.RoleName;
 import rikkei.accademy.model.User;
 import rikkei.accademy.view.viewvideo.ViewCategory;
+import rikkei.accademy.view.viewvideo.ViewSeriesFilm;
 import rikkei.accademy.view.viewvideo.ViewVideo;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class ViewHome {
         System.out.println("3: Show list user");
         System.out.println("4: Category manage");
         System.out.println("5: Video manage");
+        System.out.println("6: Series Video manage");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -60,6 +62,9 @@ public class ViewHome {
                 break;
             case 5:
                 new ViewVideo().menuVideo();
+                break;
+            case 6:
+                new ViewSeriesFilm().seriesMenu();
                 break;
             default:
                 System.out.println("Invalid choice");
@@ -119,7 +124,7 @@ public class ViewHome {
                 new ViewVideo().formSearchFilmWithName();
                 break;
             case 11:
-                new ViewVideo().formSearchFilmWithCategory();
+                new ViewVideo().formVideoWithCategory();
                 break;
             case 12:
                 new ViewVideo().formLikeVideo();
@@ -140,6 +145,7 @@ public class ViewHome {
         System.out.println("3: Show list user");
         System.out.println("4: Category manage");
         System.out.println("5: Video manage");
+        System.out.println("6: Series Video manage");
 
 
 
@@ -160,6 +166,9 @@ public class ViewHome {
                 break;
             case 5:
                 new ViewVideo().menuVideo();
+                break;
+            case 6:
+                new ViewSeriesFilm().seriesMenu();
                 break;
             default:
                 System.out.println("Invalid choice");

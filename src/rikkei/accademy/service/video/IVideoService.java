@@ -14,8 +14,7 @@ public interface IVideoService extends IGenericService<Video> {
     List<Video> seriesVideo();
 
     List<Video> video();
-
-    List<Video> searchVideoWithCategory();
-
     List<Video> searchVideoWithName(String name);
+//    List<Video> searchVideoWithCategory(Category category);
+
 }
