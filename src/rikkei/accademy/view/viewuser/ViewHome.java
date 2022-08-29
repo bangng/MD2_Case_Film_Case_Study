@@ -81,6 +81,9 @@ public class ViewHome {
         System.out.println("7: Top View Video");
         System.out.println("8: Show phim lẻ");
         System.out.println("9: Show phim bộ");
+        System.out.println("10: Search Video by name");
+        System.out.println("11: Search Video by category");
+        System.out.println("12: Like Video");
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice){
@@ -111,6 +114,15 @@ public class ViewHome {
                 break;
             case 9:
                 new ViewVideo().formShowSeriesFilm();
+                break;
+            case 10:
+                new ViewVideo().formSearchFilmWithName();
+                break;
+            case 11:
+                new ViewVideo().formSearchFilmWithCategory();
+                break;
+            case 12:
+                new ViewVideo().formLikeVideo();
                 break;
             default:
                 System.out.println("Invalid choice");

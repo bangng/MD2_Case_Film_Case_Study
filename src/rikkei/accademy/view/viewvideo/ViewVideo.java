@@ -2,7 +2,11 @@ package rikkei.accademy.view.viewvideo;
 
 import rikkei.accademy.config.Config;
 import rikkei.accademy.controller.CategoryController;
+import rikkei.accademy.controller.LikeController;
+import rikkei.accademy.controller.UserController;
 import rikkei.accademy.controller.VideoController;
+import rikkei.accademy.model.Like;
+import rikkei.accademy.model.User;
 import rikkei.accademy.model.VideoModel.Category;
 import rikkei.accademy.model.VideoModel.Video;
 import rikkei.accademy.view.viewuser.ViewHome;
@@ -14,10 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ViewVideo {
+    UserController userController = new UserController();
     VideoController videoController = new VideoController();
     CategoryController categoryController = new CategoryController();
     List<Video> videoList = videoController.getListVideo();
     List<Category> categories = categoryController.getListCategory();
+    LikeController likeController = new LikeController();
+    List<Like> likeList = likeController.getListLike();
 
     public void menuVideo() {
         System.out.println("******************VIDEO******************");
@@ -30,8 +37,11 @@ public class ViewVideo {
         System.out.println("7: Top View Video");
         System.out.println("8: Show phim lẻ");
         System.out.println("9: Show Phim Bộ");
-        System.out.println("10: Search by name");
-        System.out.println("11: Back");
+        System.out.println("10: Search Film by name");
+        System.out.println("11: Search Film by category");
+        System.out.println("12: Like video");
+        System.out.println("13: Top Like");
+        System.out.println("14: Back");
 
         int choice = 0;
         try {
@@ -72,11 +82,64 @@ public class ViewVideo {
                 formSearchFilmWithName();
                 break;
             case 11:
+                formSearchFilmWithCategory();
+                break;
+            case 12:
+                formLikeVideo();
+                break;
+            case 13:
+                formTopLikeVideo();
+                break;
+            case 14:
                 new ViewHome();
                 break;
 
         }
         menuVideo();
+    }
+
+    public void formTopLikeVideo() {
+        for(int id : likeController.topLike()){
+            Video video = videoController.findByIdVideo(id);
+            System.out.println(video.getNameVideo() + " :Like:  " + likeController.getLikeByVideoId(video.getId()).size());
+        }
+
+
+    }
+
+   public void formLikeVideo() {
+        User currentUser = userController.grtCurrenUser();
+        for (Video video: videoList) {
+            System.out.println("ID: " +video.getId() + " :Name: " + video.getNameVideo()  + " :Like: " + likeController.getLikeNumberById(video.getId()));
+        }
+        System.out.println("Enter video id to show details: ");
+        int idVideo = Integer.parseInt(Config.scanner().nextLine());
+        int likeNumber = likeController.getLikeNumberById(idVideo);
+
+        System.out.println(videoController.findByIdVideo(idVideo));
+        System.out.println("Like: " + likeNumber);
+
+        boolean checkLike = likeController.checkLike(idVideo);
+        System.out.println(checkLike ? "Liked" : "Like");
+
+        System.out.println("Enter 1 to Like or else to back");
+        int choice = Integer.parseInt(Config.scanner().nextLine());
+        if (choice == 1){
+            if (checkLike){
+                likeController.deleteLike(idVideo);
+            }else {
+                int idLike;
+                if (likeList.isEmpty()){
+                    idLike = 1;
+                }else {
+                    idLike = likeList.get(likeList.size() -1).getId() + 1;
+                }
+                likeController.createLike(new Like(idLike,idVideo,currentUser.getId()));
+            }
+        }
+    }
+
+    public void formSearchFilmWithCategory() {
     }
 
     public void formSearchFilmWithName() {
@@ -113,11 +176,12 @@ public class ViewVideo {
         } else {
             Video video = videoController.findByIdVideo(idDetail);
             video.setView(video.getView() + 1);
-            videoController.getListVideo();
+
             System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-20s%-15s%n", "ID", "VideoName", "View", "DateByVideo", "DateToUp", "Country", "Category", "isSeries");
             System.out.printf("%-15d%-15s%-15s%-15s%-15s%-15s%-20s%-15s%n", video.getId(), video.getNameVideo(), video.getView(), video.getDateByVideo(), video.getDateToUp(), video.getCountry(), video.getCategories().stream().map(Category::getCategory).collect(Collectors.toList()), video.isSeriesVideo() ? "Phim bộ" : "Phim Lẻ");
 
-            System.out.println(video);
+//            System.out.println(video);
+            videoController.getListVideo();
         }
 //        formDetailVideo();
         System.out.println("Enter quit to back or another enter key to continue");
@@ -144,36 +208,46 @@ public class ViewVideo {
             System.out.println("Enter new name to edit");
             String newNameVideo = Config.scanner().nextLine();
             if (newNameVideo.trim().equals("")) {
-                video.setNameVideo(newNameVideo);
-
+//                video.setNameVideo(newNameVideo);
+                newNameVideo = video.getNameVideo();
             }
+
             System.out.println("Thêm mới ngày sản xuất cho phim");
             String newNsx = Config.scanner().nextLine();
             if (newNsx.trim().equals("")) {
-                video.setDateByVideo(newNsx);
+//                video.setDateByVideo(newNsx);
+                newNsx = video.getDateByVideo();
 
             }
             LocalDate dateToUp = LocalDate.now();
             System.out.println("Enter new country");
             String newCountry = Config.scanner().nextLine();
             if (newCountry.trim().equals("")) {
-                video.setCountry(newCountry);
+//                video.setCountry(newCountry);
+                newCountry = video.getCountry();
 
             }
             List<Category> categoryList = video.getCategories();
             for (int i = 0; i < video.getCategories().size(); i++) {
                 System.out.println(categoryList);
             }
+
+//            for (int i = 0; i < categories.size(); i++) {
+//                System.out.println("**" + categories.get(i).getId() + "**" + categories.get(i).getCategory());
+//            }
             System.out.println("Enter id category want to edit");
             int idCategory = Config.scanner().nextInt();
+
             System.out.println(categoryController.getListCategory());
-            ;
             System.out.println("Enter id category to edit");
             int idToEdit = Config.scanner().nextInt();
             for (int i = 0; i < categoryList.size(); i++) {
                 if (categoryList.get(i).getId() == idCategory) {
                     categoryList.set(i, categoryController.detailCategory(idToEdit));
                 }
+                List<Category> listSelectCategory = new ArrayList<>();
+                selectCategory(listSelectCategory);
+
 
             }
             System.out.println("Phim bộ 1 or phim lẻ 2");
@@ -225,6 +299,10 @@ public class ViewVideo {
 
         for (Video video :
                 videoController.showVideoWithCategory(idCategory)) {
+
+            if (video == null){
+                System.out.println("Not found!!!!");
+            }
             System.out.println(video);
         }
         videoController.getListVideo();

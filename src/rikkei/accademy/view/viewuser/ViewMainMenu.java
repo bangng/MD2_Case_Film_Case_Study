@@ -28,6 +28,9 @@ public class ViewMainMenu {
         System.out.println("6: Show phim lẻ");
         System.out.println("7: Top View Video");
         System.out.println("8: Show Video with category");
+        System.out.println("9: Search Video with name video");
+        System.out.println("10: Search Video with category");
+        System.out.println("11: Top Like Video");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
@@ -56,6 +59,15 @@ public class ViewMainMenu {
                 break;
             case 8:
                 new ViewVideo().formVideoWithCategory();
+                break;
+            case 9:
+                new ViewVideo().formSearchFilmWithName();
+                break;
+            case 10:
+                new ViewVideo().formSearchFilmWithCategory();
+                break;
+            case 11:
+                new ViewVideo().formTopLikeVideo();
                 break;
 
             default:
