@@ -6,6 +6,7 @@ import rikkei.accademy.controller.VideoController;
 import rikkei.accademy.model.VideoModel.Category;
 import rikkei.accademy.model.VideoModel.Video;
 import rikkei.accademy.model.seriesfilm.Series;
+import rikkei.accademy.view.viewuser.ViewHome;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class ViewSeriesFilm {
         System.out.println("2: Create Series film");
         System.out.println("3: Delete Series film");
         System.out.println("4: Edit Series film");
+        System.out.println("5: Back");
 
         int choice = 0;
         try {
@@ -41,6 +43,9 @@ public class ViewSeriesFilm {
                 break;
             case 4:
                 formEditSeriesFilm();
+                break;
+            case 5:
+                new ViewHome();
                 break;
             default:
                 System.out.println("Invalid choice");
