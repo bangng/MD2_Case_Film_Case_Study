@@ -19,6 +19,8 @@ public class ViewSeriesFilm {
         System.out.println("*****************Menu SeriesFilm******************");
         System.out.println("1: Show list Series film");
         System.out.println("2: Create Series film");
+        System.out.println("3: Delete Series film");
+        System.out.println("4: Edit Series film");
 
         int choice = 0;
         try {
@@ -34,6 +36,43 @@ public class ViewSeriesFilm {
             case 2:
                 formCreateSeriesFilm();
                 break;
+            case 3:
+                formDeleteSeriesFilm();
+                break;
+            case 4:
+                formEditSeriesFilm();
+                break;
+            default:
+                System.out.println("Invalid choice");
+        }
+        seriesMenu();
+
+    }
+// Phần việc của ngày mai
+    private void formEditSeriesFilm() {
+
+    }
+//    phần việc của ngày mai!!!!
+
+    private void formDeleteSeriesFilm() {
+
+        System.out.println("Enter id series to delete");
+        int idSeries = Config.scanner().nextInt();
+        if (seriesFilmController.findByIdSeries(idSeries) == null) {
+            System.out.println("Not found");
+        } else {
+            System.out.println("Enter 1 to delete or 2 to not delete");
+            int choiceDelete = Config.scanner().nextInt();
+            switch (choiceDelete) {
+                case 1:
+                    seriesFilmController.deleteSeries(idSeries);
+                   formShowListSeriesFilm();
+                    seriesFilmController.getListSeries();
+                    break;
+                case 2:
+                   seriesMenu();
+                    break;
+            }
         }
 
     }
@@ -59,16 +98,16 @@ public class ViewSeriesFilm {
     private void formShowListSeriesFilm() {
         System.out.println("*********************LIST SERIES FILM*********************");
         for (Series series: seriesList) {
-            System.out.println(series);
+            System.out.println("ID: "+ series.getId() + " :name: "+series.getName()+" :video: " +series.getVideos());
         }
     }
 
     private void formCreateSeriesFilm() {
         int lastId;
-        if (videoList.isEmpty()) {
+        if (seriesList.isEmpty()) {
             lastId = 1;
         } else {
-            lastId = videoList.get(videoList.size() - 1).getId() + 1;
+            lastId = seriesList.get(seriesList.size() - 1).getId() + 1;
         }
         System.out.println("Enter name Series Film");
         String name = "";

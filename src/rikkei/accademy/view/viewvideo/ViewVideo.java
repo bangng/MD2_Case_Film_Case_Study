@@ -102,8 +102,10 @@ public class ViewVideo {
         menuVideo();
     }
 
-    private void formVideoByDate() {
-
+   public void formVideoByDate() {
+        for(Video video : videoController.getTopVideoByNgaySX()) {
+            System.out.println(video.getNameVideo() + "   " + video.getDateByVideo());
+        }
     }
 
 

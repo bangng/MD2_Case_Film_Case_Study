@@ -31,13 +31,13 @@ public class ViewMainMenu {
         System.out.println("9: Search Video with name video");
         System.out.println("10: Search Video with category");
         System.out.println("11: Top Like Video");
+        System.out.println("12: Top film by NSX");
 
 
         int choice = Integer.parseInt(Config.scanner().nextLine());
         switch (choice) {
             case 1:
                 fromRegister();
-
                 break;
             case 2:
                 formLogin();
@@ -68,6 +68,9 @@ public class ViewMainMenu {
                 break;
             case 11:
                 new ViewVideo().formTopLikeVideo();
+                break;
+            case 12:
+                new ViewVideo().formVideoByDate();
                 break;
 
             default:

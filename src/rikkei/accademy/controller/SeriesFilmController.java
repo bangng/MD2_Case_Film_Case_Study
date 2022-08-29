@@ -25,6 +25,10 @@ public class SeriesFilmController {
     public void createSeries(Series series){
         seriesFilmService.save(series);
     }
+    public void upDateSeries(Series series1){
+        seriesFilmService.eDitSeries(series1);
+
+    }
 
 
 }
